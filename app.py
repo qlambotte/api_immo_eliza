@@ -97,15 +97,15 @@ def predict():
         return message
     if request.method == 'POST':
         json0 = request.get_json()
+        v = jsonschema.Draft4Validator(schema)
         try:
-            v = jsonschema.Draft3Validator(schema)
             v.validate(json0)
             json = json0["data"]
             c.cleaning(json)
             c.one_hot(json)
             data = c.data_to_array(json)
             return jsonify(price = p.predict(data, "./model/model.joblib"))
-        except jsonschema.exceptions.ValidationError as err:
+        except jsonschema.exceptions.ValidationError:
             errors = sorted(v.iter_errors(json0), key=lambda e: e.path)
             return jsonify(errors=[error.message for error in errors])
 
@@ -115,4 +115,4 @@ def format():
     return jsonify(schema)
 if __name__ == '__main__':
     port = os.environ.get("PORT", 5000)
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
