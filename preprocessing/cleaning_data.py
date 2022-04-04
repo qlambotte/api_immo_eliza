@@ -55,7 +55,7 @@ label_details = {
     "Terrace": (bool, False),
     "Surface terrace": (float, 0),
     "Garden": (bool, False),
-    "Surface garden": (bool, 0),
+    "Surface garden": (float, 0),
     "Garage": (bool, False),
     "Kitchen equipment": (str, "Not equipped"),
     "State of the property": (str, "Normal"),
@@ -71,7 +71,6 @@ def cleaning(data):
     ]
     for key in undefined_keys:
         data[key] = cleaning_by_key(None, key, label_details[key])
-
 
 one_hot_labels = [
     "Kitchen equipment_Fully equipped",
@@ -112,4 +111,4 @@ def data_to_array(data):
 def preprocess(data):
     cleaning(data)
     one_hot(data)
-    data_to_array(data)
+    return data_to_array(data)
