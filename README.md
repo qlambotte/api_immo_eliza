@@ -17,7 +17,9 @@ To run the app, just issue the following command in a terminal:
 python app.py
 ```
 
-Predictions are obtained using a POST request at the route `/predict` by sending data in JSON format using a prescribed schema, which can be found as a result of a GET request at `/predict/format`.
+The app has three routes: `/`, `/predict` and `/predict/format`. The route `/` allows only a GET request, which returns a welcome message if the server is running or an error otherwise. The route `/predict` allows GET and POST requests. The GET request returns a message that explains how to issue a POST request (see the following paragraph for more details) and the POST request, given data about a property (in JSON format), returns a prediction of the price of the property or an error if the data sent is not in the appropriate format, each response being sent in JSON format. 
+
+As mentionned above, predictions are obtained using a POST request at the route `/predict` by sending data in JSON format using a prescribed schema, which can be found as a result of a GET request at `/predict/format`.
 ```json
  {
     "$schema": "http://json-schema.org/draft-04/schema#",
