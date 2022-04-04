@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import predict.prediction as p
 import os
-import preprocessing.cleaning as c
+import preprocessing.cleaning_data as c
 import jsonschema
 
 app = Flask(__name__)
