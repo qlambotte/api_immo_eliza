@@ -108,3 +108,8 @@ def one_hot(data):
 
 def data_to_array(data):
     return np.array([[data[key] for key in labels]])
+
+def preprocess(data):
+    cleaning(data)
+    one_hot(data)
+    data_to_array(data)
