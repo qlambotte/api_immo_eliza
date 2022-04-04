@@ -84,9 +84,7 @@ def predict():
         try:
             v.validate(json0)
             json = json0["data"]
-            c.cleaning(json)
-            c.one_hot(json)
-            data = c.data_to_array(json)
+            data = c.preprocess(json)
             return jsonify(price=p.predict(data, "./model/model.joblib"))
         except jsonschema.exceptions.ValidationError:
             errors = sorted(v.iter_errors(json0), key=lambda e: e.path)
